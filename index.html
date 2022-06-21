@@ -1,0 +1,143 @@
+<!-- 
+    Author: Kelly Ervin Mills
+    Date Last Edited: 06/20/2022
+
+    Sources:
+        https://observablehq.com/@rkaravia/css-trick-tabs-with-consistent-height 
+-->
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
+        <!-- Custom CSS -->
+        <style>
+            body {
+                font-family: Helvetica, sans-serif;
+                background-color: whitesmoke;
+                margin: auto;
+                width: 70%;
+            }
+            section {
+                padding-top: 5em;
+            }
+            iframe {
+                background-color: white;
+            }
+            .tab-content {
+                display: flex;
+            }
+            .tab-content > .tab-pane {
+                display: block;
+                visibility: hidden;
+                margin-right: -100%;
+                width: 100%;
+            }
+            .tab-content > .active {
+                visibility: visible;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Have you noticed your grocery bill creeping up?</h1>
+        <span>Lorem ipsum blah blah blah...</span>
+
+        <!-- Grocery Inflation Calculator -->
+        <section>
+            <span> If you spent </span>
+            <input type="text" placeholder="$100.00"></input>
+            <span> on groceries in </span>
+            <input type="text" placeholder="January"></input>
+            <input type="text" placeholder="2020"></input>
+            <span> you need to spend $150.00 today to purchase the same groceries.</span>
+        </section>
+
+        <!-- Big Number Stat -->
+        <section>
+            <span>
+                In January of 2020, 10% of Americans experienced financial stress over groceries. Now, that number is
+            </span>
+            <span>20%</span>
+        </section>
+
+        <!-- Tabbed Line Graphs -->
+        <section>
+            <span>
+                Not all types of foods have increased in price at the same rate.
+            </span>
+            <span>
+                Take a closer look at the differences below:
+            </span>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Dairy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Meats</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Produce</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <iframe width="80%" height="584.0625" frameborder="0"
+                        src="https://observablehq.com/embed/@d3/line-with-tooltip?cells=chart">
+                    </iframe>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <iframe width="80%" height="584.0625" frameborder="0"
+                        src="https://observablehq.com/embed/@d3/line-with-tooltip?cells=chart">
+                    </iframe>
+                </div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <iframe width="80%" height="584.0625" frameborder="0"
+                        src="https://observablehq.com/embed/@d3/line-with-tooltip?cells=chart">
+                    </iframe>
+                </div>
+            </div>
+        </section> 
+
+        <!-- Bivariate Choropleth -->
+        <section>
+            <span>
+                Of course, Americans are affected by grocery inflation to varying degrees...
+            </span>
+            <iframe width="80%" height="1058" frameborder="0"
+                src="https://observablehq.com/embed/@ervinkellym/bivariate-choropleth-with-continuous-color-scales-and-too?cells=chart%2Cviewof+selectors">
+            </iframe>
+        </section>
+
+        <!-- Multi-Line Chart -->
+        <section>
+            <span>
+                Many Americans who are heavily affected by food inflation rely on federal food assistance programs.
+            </span>
+            <span>
+                But, the amounts that these benefit programs provide has not kept up...
+            </span>
+            <iframe width="80%" height="584.078125" frameborder="0"
+                src="https://observablehq.com/embed/@guypursey/line-chart-multiple-series-with-tooltip?cells=chart">
+            </iframe>
+        </section>
+
+        <!-- Conclusion -->
+        <section>
+            <span>
+                For all Americans, and especially for those who rely on federal food assistance programs, we must advocate for increased funding.
+            </span>
+        </section>
+
+        <!-- Bootstrap JavaScript -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>
