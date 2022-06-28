@@ -26,20 +26,66 @@
         <!-- Custom CSS -->
         <style>
             body {
-                font-family: Helvetica, sans-serif;
+                font-family: Georgia, serif;
                 background-color: whitesmoke;
                 margin: auto;
                 width: 70%;
+                margin-bottom: 5em;
+            }
+            h1, h2, h3, h4, h5 {
+                margin-top: 1em;
+                margin-bottom: 1em;
+                font-family: Georgia, serif;
+                font-weight: 600;
             }
             h1 {
-                /* TODO figure out why this isn't working */
-                margin-top: 10em;
+                font-size: 5em;
+            }
+            span, a {
+                font-size: 1.5em;
+            }
+            p {
+                font-size: 1.5em;
+                margin-top: 1em;
+                margin-bottom: 1em;
             }
             section {
                 padding-top: 5em;
             }
             iframe {
                 background-color: white;
+            }
+            input, select {
+                font-size: 1.5em;
+                margin-left: 0.5em;
+                margin-right: 0.5em;
+            }
+            .quote {
+                font-family: Georgia, serif;
+                font-size: 2.5em;
+            }
+            .quote-emphasis {
+                font-family: Georgia, serif;
+                font-size: 4em;
+                font-weight: 600;
+                color: firebrick;
+            }
+            .source {
+                font-family: Georgia, serif;
+                font-style: italic;
+                font-size: 1.5em;
+            }
+            .lil-source {
+                font-family: Georgia, serif;
+                font-style: italic;
+                font-size: 1em;
+            }
+            .calc {
+                font-weight: 600;
+            }
+            .calc-result {
+                font-weight: 600;
+                text-decoration: underline; 
             }
             .tab-content {
                 display: flex;
@@ -54,24 +100,6 @@
                 visibility: visible;
             }
 
-            body {
-                /* margin: 0; */
-                padding: 0;
-            }
-
-            h2, h3 {
-                margin: 10px;
-                font-size: 18px;
-            }
-
-            h3 {
-                font-size: 16px;
-            }
-
-            p {
-                margin: 10px;
-            }
-
             #html, #body, #map-container {
                 height: 100%;
             }
@@ -81,11 +109,12 @@
             * on the page */
             #map {
                 height: 600px;
-                width: 80%;
+                width: 100%;
+                z-index: -1;
             }
 
             .mapbox {
-                z-index: 8;
+                z-index: -1;
             }
 
             /**
@@ -98,7 +127,7 @@
                 font-family: Arial, sans-serif;
                 overflow: auto;
                 border-radius: 3px;
-                z-index: 9;
+                z-index: 1;
             }
 
             #features {
@@ -129,13 +158,18 @@
 
     <body>
         <h1>Have you noticed your grocery bill creeping up?</h1>
-        <span>Lorem ipsum blah blah blah...</span>
+        <span>If you're like most Americans, it's pretty dificult to ignore quickly rising prices everywhere, but especially at the grocery store. While it is easy to see that prices are rising, it's hard to tell from your grocery purchases how much prices are going up by consistently.</span>
 
         <!-- Grocery Inflation Calculator -->
         <section>
-            <span> If you spent </span>
-            <input id="dollars_input" type="text" placeholder="100" onchange="calculateInflation()"></input>
-            <span> on groceries in </span>
+            <h2>Grocery Inflation Calculator</h2>
+            <span>To better understand how much more you're paying for groceries, try out this inflation calculator based on the </span> 
+            <a class="source" href="https://www.ers.usda.gov/data-products/food-price-outlook/">USDA's</a>
+            <span> Consumer Price Index (CPI) for food at home:</span>
+            <p></p>
+            <span class="calc"> If you spent $</span>
+            <input id="dollars_input" type="text" value="0" onchange="calculateInflation()"></input>
+            <span class="calc"> on groceries in </span>
             <select name="year" id="year_select" onchange="calculateInflation()">
                 <option value="1974">1974</option>
                 <option value="1975">1975</option>
@@ -187,9 +221,9 @@
                 <option value="2021">2021</option>
                 <option value="2022">2022</option>
             </select>
-            <span> you need to spend $</span>
-            <span id="calculated">150.00</span>
-            <span> today to purchase the same groceries.</span>
+            <span class="calc"> you would need to spend $</span>
+            <span class="calc-result" id="calculated">0</span>
+            <span class="calc"> today to purchase the same groceries.</span>
             <script>
                 const cpi = [
                     100, 108, 110, 117, 129, 143, 155, 166, 172, 174, 180, 183, 188,
@@ -200,28 +234,31 @@
                 function calculateInflation() {
                     document.getElementById("calculated").innerHTML = 
                         parseInt(document.getElementById("dollars_input").value) 
-                            * cpi[2022 - 1974] 
+                            * cpi[2019 - 1974] 
                             / cpi[parseInt(document.getElementById("year_select").value) - 1974];
                 }
             </script>
+            <p></p>
+            <a href="https://www.ers.usda.gov/data-products/food-price-outlook/" class="lil-source">Source</a>
         </section>
 
         <!-- Big Number Stat -->
         <section>
-            <span>
-                In January of 2020, 10% of Americans experienced financial stress over groceries. Now, that number is
+            <span class="quote">"Overall, grocery prices were</span>
+            <span class="quote-emphasis"> 12 percent </span>
+            <span class="quote">
+                higher last month than they were a year earlier, according to the Bureau of Labor Statistics. That was the
             </span>
-            <span>20%</span>
+            <span class="quote-emphasis"> largest year-over-year increase since 1979."</span>
+            <a class="source" href="https://www.nytimes.com/2022/06/28/your-money/inflation-consumer-behavior.html">- The New York Times, June 2022</a>
         </section>
 
         <!-- Tabbed Line Graphs -->
         <section>
-            <span>
-                Not all types of foods have increased in price at the same rate.
-            </span>
-            <span>
-                Take a closer look at the differences below:
-            </span>
+            <h2>CPI by Grocery Category</h2>
+            <p>
+                Not all types of foods have increased in price at the same rate. Take note of the differences in CPI increases for different grocery categories.
+            </p>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="grocery-tab" data-toggle="tab" href="#groceries" role="tab" aria-controls="groceries" aria-selected="false">All Groceries</a>
@@ -250,53 +287,54 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="groceries" role="tabpanel" aria-labelledby="grocery-tab">
-                    <iframe width="80%" height="583.953125" frameborder="0"
+                    <iframe width="100%" height="583.953125" frameborder="0"
                         src="https://observablehq.com/embed/@ervinkellym/groceries-cpi-line-charts?cells=groceries_chart">
                     </iframe>
                 </div>
                 <div class="tab-pane fade" id="meat" role="tabpanel" aria-labelledby="meat-tab">
-                    <iframe width="80%" height="583.953125" frameborder="0"
+                    <iframe width="100%" height="583.953125" frameborder="0"
                         src="https://observablehq.com/embed/@ervinkellym/groceries-cpi-line-charts?cells=meats_chart">
                     </iframe>
                 </div>
                 <div class="tab-pane fade" id="eggs" role="tabpanel" aria-labelledby="egg-tab">
-                    <iframe width="80%" height="584.953125" frameborder="0"
+                    <iframe width="100%" height="584.953125" frameborder="0"
                         src="https://observablehq.com/embed/@ervinkellym/groceries-cpi-line-charts?cells=eggs_chart">
                     </iframe>
                 </div>
                 <div class="tab-pane fade" id="dairy" role="tabpanel" aria-labelledby="dairy-tab">
-                    <iframe width="80%" height="583.953125" frameborder="0"
+                    <iframe width="100%" height="583.953125" frameborder="0"
                         src="https://observablehq.com/embed/@ervinkellym/groceries-cpi-line-charts?cells=dairy_chart">
                     </iframe>
                 </div>
                 <div class="tab-pane fade" id="fats" role="tabpanel" aria-labelledby="fats-tab">
-                    <iframe width="80%" height="583.953125" frameborder="0"
+                    <iframe width="100%" height="583.953125" frameborder="0"
                         src="https://observablehq.com/embed/@ervinkellym/groceries-cpi-line-charts?cells=fatsoils_chart">
                     </iframe>
                 </div>
                 <div class="tab-pane fade" id="produce" role="tabpanel" aria-labelledby="produce-tab">
-                    <iframe width="80%" height="583.953125" frameborder="0"
+                    <iframe width="100%" height="583.953125" frameborder="0"
                         src="https://observablehq.com/embed/@ervinkellym/groceries-cpi-line-charts?cells=fruitsveg_chart">
                     </iframe>
                 </div>
                 <div class="tab-pane fade" id="sweets" role="tabpanel" aria-labelledby="sweets-tab">
-                    <iframe width="80%" height="583.953125" frameborder="0"
+                    <iframe width="100%" height="583.953125" frameborder="0"
                         src="https://observablehq.com/embed/@ervinkellym/groceries-cpi-line-charts?cells=sugarsweets_chart">
                     </iframe>
                 </div>
                 <div class="tab-pane fade" id="bakery" role="tabpanel" aria-labelledby="bakery-tab">
-                    <iframe width="80%" height="583.953125" frameborder="0"
+                    <iframe width="100%" height="583.953125" frameborder="0"
                         src="https://observablehq.com/embed/@ervinkellym/groceries-cpi-line-charts?cells=cerealsbakery_chart">
                     </iframe>
                 </div>
             </div>
+            <a href="https://www.ers.usda.gov/data-products/food-price-outlook/" class="lil-source">Source</a>
+            <p>Regardless of the grocery category, all foods have had sharp increases in CPI since the beginning of the pandemic compared to their relatively stably increasing price histories. The heaviest hitters in CPI are Meat, Poulty, & Fish, Produce, and Cereals & Bakery. These items are staples in many American housholds so these specific price increases are especially challenging.</p>
         </section> 
 
         <!-- Bivariate Choropleth -->
         <section>
-            <span>
-                Of course, Americans are affected by grocery inflation to varying degrees...
-            </span>
+            <h2>Grocery Inflation and Food Benefits Usage by Location</h2>
+            <p>Of course, Americans are affected by grocery inflation to varying degrees. Many people utilize food benefit programs like SNAP, the Supplemental Nutrition Assistance Program, in order to afford their groceries. Take a look here at SNAP usage, as a percentage of eligible recipients (blue), vs the CPI for groceries across the country (red).</p>
             <div id='map'>
                 <div class='mapbox'>
                     <script>
@@ -376,27 +414,36 @@
                     <h2>US population density</h2>
                     <div id='pd'><p>Hover over a state!</p></div></div>
                 <div class='map-overlay' id='legend'></div>
-            </div> 
+            </div>
+            <a href="https://www.fns.usda.gov/usamap#" class="lil-source">Source A</a>
+            <span>, </span>
+            <a href="https://www.bea.gov/data/consumer-spending/state" class="lil-source">Source B</a>
+            <p>The more red a state appears, the greater the imbalance between grocery CPI and SNAP utilization in that state. Overall the map appears more red than blue. From this observation, we can draw a conclusion that, in most states, Americans are heavily affected by grocery inflation and are not utilizing SNAP benefits to the necessary extent.</p>
         </section>
 
         <!-- Multi-Line Chart -->
         <section>
+            <h2>Average Monthly SNAP Benefit Amounts vs Consumer Price Index for Food at Home, 2018-2022</h2>
             <span>
-                Many Americans who are heavily affected by food inflation rely on federal food assistance programs.
+                Take a look at how average SNAP benefits per person have related to recent increases in the CPI for groceries...
             </span>
-            <span>
-                But, the amounts that these benefit programs provide has not kept up...
-            </span>
-            <iframe width="80%" height="584.078125" frameborder="0"
-                src="https://observablehq.com/embed/@guypursey/line-chart-multiple-series-with-tooltip?cells=chart">
+            <iframe width="100%" height="584.078125" frameborder="0"
+                src="https://observablehq.com/embed/@ervinkellym/line-chart-multiple-series-with-tooltip?cells=chart%2Cstyle">
             </iframe>
+            <a href="https://www.ers.usda.gov/data-products/food-price-outlook/" class="lil-source">Source A</a>
+            <span>, </span>
+            <a href="https://www.fns.usda.gov/pd/supplemental-nutrition-assistance-program-snap" class="lil-source">Source B</a>
+            <p>
+                It is important to note here that average monthly SNAP benefit amounts per-person have actually increased well above the consumer price index for groceries. This is largely due to many states' emergency SNAP benefit increases throughout the COVID-19 pandemic. However, many of those emergency benefits are going away soon, if they haven't already. This reduction in benefits will be happening as Americans are experiencing the highest inflation levels in decades.
+            </p>
+            <p class="quote">
+                We must advocate for continued increased funding for SNAP benefits so they can remain at emergency levels throughout this period of rapid inflation. If not, the most vulnerable among us will experience even greater hardship and food insecurity.
+            </p>
         </section>
 
         <!-- Conclusion -->
         <section>
-            <span>
-                For all Americans, and especially for those who rely on federal food assistance programs, we must advocate for increased funding.
-            </span>
+            <p>Kelly Ervin Mills, June 2022</p>
         </section>
 
         <!-- Bootstrap JavaScript -->
