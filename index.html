@@ -233,9 +233,9 @@
                 ];
                 function calculateInflation() {
                     document.getElementById("calculated").innerHTML = 
-                        parseInt(document.getElementById("dollars_input").value) 
-                            * cpi[2019 - 1974] 
-                            / cpi[parseInt(document.getElementById("year_select").value) - 1974];
+                        Math.trunc(parseInt(document.getElementById("dollars_input").value) 
+                            * cpi[2022 - 1974] 
+                            / cpi[parseInt(document.getElementById("year_select").value) - 1974]);
                 }
             </script>
             <p></p>
